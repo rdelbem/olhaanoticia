@@ -20,9 +20,6 @@ function ForLaterNews() {
   if (verifyDataStoredLocally()) {
     return (
       <div className="container">
-        <div className="section-title">
-          <h2>Para ler mais tarde</h2>
-        </div>
         {savedNews.map((item, index) => {
           return (
             <NewsLater

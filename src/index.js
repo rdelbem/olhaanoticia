@@ -9,12 +9,16 @@ import reportWebVitals from "./reportWebVitals";
 //PAGES
 import ForLaterNews from "./pages/ForLaterNews";
 import Notes from "./pages/Notes";
+
+//COMPONENTS
 import Menu from "./components/Menu";
+import Header from "./components/Header";
 
 function Main() {
   return (
     <BrowserRouter>
       <Menu />
+      <Header />
       <Switch>
         <Route path="/" exact>
           <App />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dateFormat from "dateformat";
 
 function News(props) {
   const {
@@ -50,7 +51,9 @@ function News(props) {
     <div className="news-box">
       <div className="header-news">
         <h3 className="title">{title}</h3>
-        <small className="published-date">{published_date}</small>
+        <small className="published-date">
+          {dateFormat(published_date, "dd/mm/yyyy")}
+        </small>
       </div>
 
       {media && (

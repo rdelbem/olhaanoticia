@@ -46,8 +46,8 @@ function App() {
         }
       );
 
-      const responseWithTheNewsObj = await response.json();
-      const theNews = responseWithTheNewsObj.articles;
+      const data = await response.json();
+      const theNews = data.articles;
 
       localStorage.setItem(today, JSON.stringify(theNews));
 
@@ -79,9 +79,6 @@ function App() {
   if (news.length > 0) {
     return (
       <div className="container">
-        <div className="section-title">
-          <h2>Últimas notícias de hoje</h2>
-        </div>
         {news.map((item, index) => {
           return <News key={index} {...item} />;
         })}
