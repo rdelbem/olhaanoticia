@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
 import News from "./components/News";
 import Loading from "./components/Loading";
+import NavState from "./contexts/navigation/NavState";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 import "./App.css";
+
+//PAGES
+import ForLaterNews from "./pages/ForLaterNews";
+import Notes from "./pages/Notes";
+
+//COMPONENTS
+import Menu from "./components/Menu";
+import Header from "./components/Header";
 
 function App() {
   const [news, setNews] = useState([]);
@@ -78,11 +89,27 @@ function App() {
 
   if (news.length > 0) {
     return (
-      <div className="container">
-        {news.map((item, index) => {
-          return <News key={index} {...item} />;
-        })}
-      </div>
+      <NavState>
+        <BrowserRouter>
+          <Menu />
+          <Header />
+          <Switch>
+            <Route path="/" exact>
+              <div className="container">
+                {news.map((item, index) => {
+                  return <News key={index} {...item} />;
+                })}
+              </div>
+            </Route>
+            <Route path="/for-later-news" exact>
+              <ForLaterNews />
+            </Route>
+            <Route path="/notes" exact>
+              <Notes />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </NavState>
     );
   }
 }

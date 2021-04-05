@@ -40,9 +40,6 @@ function Notes() {
 
   return (
     <div className="container">
-      <div className="section-title">
-        <h2>Tome notas</h2>
-      </div>
       <div className="form">
         <div>
           <textarea

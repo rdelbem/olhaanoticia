@@ -2,41 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
-//PAGES
-import ForLaterNews from "./pages/ForLaterNews";
-import Notes from "./pages/Notes";
-
-//COMPONENTS
-import Menu from "./components/Menu";
-import Header from "./components/Header";
-
-function Main() {
-  return (
-    <BrowserRouter>
-      <Menu />
-      <Header />
-      <Switch>
-        <Route path="/" exact>
-          <App />
-        </Route>
-        <Route path="/for-later-news" exact>
-          <ForLaterNews />
-        </Route>
-        <Route path="/notes" exact>
-          <Notes />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
-}
-
 ReactDOM.render(
   <React.StrictMode>
-    <Main />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
