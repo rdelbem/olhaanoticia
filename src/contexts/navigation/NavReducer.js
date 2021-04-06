@@ -5,17 +5,17 @@ export default (state, action) => {
     case HOME_ROUTE:
       return {
         ...state,
-        page: "home",
+        page: action.payload,
       };
     case LATER_ROUTE:
       return {
         ...state,
-        page: "later",
+        page: action.payload,
       };
     case NOTES_ROUTE:
       return {
         ...state,
-        page: "notes",
+        page: action.payload,
       };
 
     default:

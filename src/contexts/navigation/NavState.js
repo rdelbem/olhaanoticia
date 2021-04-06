@@ -7,6 +7,8 @@ export default function NavState(props) {
   const initialState = null;
   const [state, dispatch] = useReducer(NavReducer, initialState);
 
+  //VERIFY URL ALSO
+
   const home = () => dispatch({ type: HOME_ROUTE, payload: "home" });
   const later = () => dispatch({ type: LATER_ROUTE, payload: "later" });
   const notes = () => dispatch({ type: NOTES_ROUTE, payload: "notes" });

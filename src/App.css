@@ -175,6 +175,11 @@ a {
   max-width: 133rem;
 }
 
+.container-notes {
+  display: flex;
+  flex-direction: column;
+}
+
 @media only screen and (min-width: 684px) {
   .menu {
     top: 0;
@@ -216,6 +221,33 @@ a {
 }
 
 @media only screen and (min-width: 875px) {
+  .notes {
+    padding: 0 2rem;
+    width: 100% !important;
+  }
+
+  .form-div {
+    display: block !important;
+    width: 40% !important;
+    padding: 1rem;
+  }
+
+  .form-div textarea {
+    font-size: 1.5rem;
+    height: 15rem !important;
+  }
+
+  .form-div button {
+    font-size: 1.5rem;
+    padding: 1rem !important;
+  }
+
+  .container-notes {
+    margin-bottom: 3rem;
+    min-width: 90%;
+    flex-direction: row !important;
+  }
+
   .news-box {
     max-width: 40rem;
   }
@@ -291,7 +323,7 @@ a {
   }
 }
 
-.form {
+.form-div {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -299,26 +331,23 @@ a {
   align-content: center;
 }
 
-.form textarea {
-  width: 99%;
+.form-div textarea {
+  width: 100% !important;
   background-color: #e6e6e6;
   border-radius: 5px;
 }
 
-.form button {
+.form-div button {
   width: 100%;
   background-color: #76ebc8;
   border: 1px solid #69c0a6;
   padding: 0.3rem;
   border-radius: 5px;
+  transition: all 0.5s;
 }
 
-.spacer {
-  height: 5px;
-  width: 100%;
-  background-color: #b8b8b8;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+.form-div button:hover {
+  background-color: #6bdab8;
 }
 
 .notes {
@@ -333,13 +362,15 @@ a {
 }
 
 .the-note-box {
-  margin-bottom: 0.4rem;
-  border-bottom: 2px solid #c9c9c9;
+  font-size: 1.7rem;
+  margin: 0.8rem 0;
 }
 
 .the-note-box h4 {
+  font-size: 1.9rem;
   border-radius: 5px;
-  background-color: #cecece;
+  padding: 0.5rem;
+  background-color: #e6e6e6;
 }
 
 .note-text {
@@ -352,6 +383,7 @@ a {
 }
 
 .icons {
+  cursor: pointer;
   text-align: right;
   width: 99.6%;
 }
