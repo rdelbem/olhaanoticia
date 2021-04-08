@@ -90,7 +90,7 @@ function News(props) {
             )}
             {!wasSaved && (
               <p className="pointer" onClick={saveForLater}>
-                salvar
+                Salvar
               </p>
             )}
           </small>
