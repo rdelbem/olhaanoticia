@@ -32,6 +32,7 @@ function Notes() {
 
       setNotes(noteArray);
       setTextArea("");
+      setTheText("");
 
       let noteStringfied = JSON.stringify(notes);
       localStorage.setItem("notes", noteStringfied);
