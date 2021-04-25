@@ -1,43 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import TheNote from "../components/TheNote";
+import NotesContext from "../contexts/notes/NotesContext";
 
 function Notes() {
-  const [theText, setTheText] = useState();
-  const [notes, setNotes] = useState([]);
-  //necessary to update textarea value
-  const [textArea, setTextArea] = useState();
-
-  const verifyNotesStored = () => {
-    if (!!localStorage.getItem("notes")) {
-      let storedNotes = JSON.parse(localStorage.getItem("notes"));
-      setNotes(storedNotes);
-    }
-  };
-
-  useEffect(() => {
-    verifyNotesStored();
-  }, []);
-
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (theText !== undefined && theText !== "") {
-      let theNoteObj = {
-        date: new Date().toLocaleDateString(),
-        id: Math.floor(Math.random() * Math.floor(100000000)),
-        note: theText.trim(),
-      };
-
-      let noteArray = notes;
-      noteArray.unshift(theNoteObj);
-
-      setNotes(noteArray);
-      setTextArea("");
-      setTheText("");
-
-      let noteStringfied = JSON.stringify(notes);
-      localStorage.setItem("notes", noteStringfied);
-    }
-  };
+  const notesContext = useContext(NotesContext);
+  const { state, setTheText, handleSave } = notesContext;
 
   return (
     <div className="container">
@@ -47,12 +14,11 @@ function Notes() {
             <textarea
               onChange={(e) => {
                 setTheText(e.target.value.trim());
-                setTextArea();
               }}
               cols="50"
               rows="3"
               placeholder="Escreva sua nota"
-              value={textArea}
+              value={state.text}
             ></textarea>
           </div>
           <div>
@@ -61,10 +27,8 @@ function Notes() {
         </div>
 
         <div className="notes">
-          {notes.map((item, index) => {
-            return (
-              <TheNote key={index} notesState={[notes, setNotes]} {...item} />
-            );
+          {state.notes.map((item, index) => {
+            return <TheNote key={index} {...item} />;
           })}
         </div>
       </div>

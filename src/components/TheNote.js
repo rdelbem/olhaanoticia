@@ -1,65 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
+import NotesContext from "../contexts/notes/NotesContext";
 
 function TheNote(props) {
-  const [notes, setNotes] = props.notesState;
   const { date, id, note } = props;
-  const [editingNote, setEditingNote] = useState(false);
-  const [editNote, setEditNote] = useState({});
-
-  const findAndReplaceNote = (arrayInput, _id, replacement) => {
-    let indexRemoved = 0;
-    let replacedObj;
-
-    let filteredItems = arrayInput.filter((item, index) => {
-      let newArray = item.id !== _id;
-      if (item.id === _id) indexRemoved = index;
-      replacedObj = item;
-      return newArray;
-    });
-
-    if (
-      replacedObj.note !== replacement.note &&
-      replacement.hasOwnProperty("note")
-    ) {
-      filteredItems.splice(indexRemoved, 0, replacement);
-      return filteredItems;
-    }
-  };
-
-  const saveEdited = (e) => {
-    e.preventDefault();
-    setEditingNote(false);
-    let editedArrayOfNotes = findAndReplaceNote(notes, editNote.id, editNote);
-    if (!!editedArrayOfNotes) {
-      setNotes(editedArrayOfNotes);
-      localStorage.setItem("notes", JSON.stringify(editedArrayOfNotes));
-    }
-  };
-
-  const deleteNote = (e) => {
-    setEditingNote(false);
-    const noteId = e.target.getAttribute("data-id");
-    let notesAfterDelete = notes.filter((note) => {
-      return note.id !== parseInt(noteId);
-    });
-    setNotes(notesAfterDelete);
-    localStorage.setItem("notes", JSON.stringify(notesAfterDelete));
-  };
+  const notesContext = useContext(NotesContext);
+  const {
+    state,
+    editingNote,
+    setEditNote,
+    setEditingNote,
+    deleteNote,
+    saveEdited,
+  } = notesContext;
 
   return (
     <div className="the-note-box">
       <h4>Nota tomada em - {date}</h4>
       <div className="note-text">
-        {!editingNote && (
+        {state.id !== id && (
           <>
+            {console.log(state.id === id, state.id, id)}
             <div className="icons">
               <FaEdit
                 className="icon-margin"
                 id={id}
                 onClick={() => {
-                  editingNote ? setEditingNote(false) : setEditingNote(true);
+                  editingNote ? setEditingNote(id) : setEditingNote(id);
                 }}
               />
               <FaRegTrashAlt
@@ -73,8 +41,9 @@ function TheNote(props) {
             </div>
           </>
         )}
-        {editingNote && (
+        {state.id === id && (
           <div className="form">
+            {console.log(state.id === id, state.id, id)}
             <textarea
               data-date={date}
               onChange={(e) => {

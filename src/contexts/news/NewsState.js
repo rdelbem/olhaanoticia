@@ -43,7 +43,7 @@ export default function NewsState(props) {
   };
   ////////////helpers end
 
-  ////////api call if necessary OR get data from local storage
+  ////////api call if necessary OR get data from local storage, necessary to prevent fetching for the same news again
   const setNews = async (from) => {
     setLoading();
     if (from === "api") {

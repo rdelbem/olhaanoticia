@@ -1,6 +1,7 @@
 import React from "react";
 import NavState from "./contexts/navigation/NavState";
 import NewsState from "./contexts/news/NewsState";
+import NotesState from "./contexts/notes/NotesState";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 //STYLES
@@ -19,21 +20,23 @@ function App() {
   return (
     <NewsState>
       <NavState>
-        <BrowserRouter>
-          <Menu />
-          <Header />
-          <Switch>
-            <Route path="/" exact>
-              <NewsFront />
-            </Route>
-            <Route path="/for-later-news" exact>
-              <ForLaterNews />
-            </Route>
-            <Route path="/notes" exact>
-              <Notes />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+        <NotesState>
+          <BrowserRouter>
+            <Menu />
+            <Header />
+            <Switch>
+              <Route path="/" exact>
+                <NewsFront />
+              </Route>
+              <Route path="/for-later-news" exact>
+                <ForLaterNews />
+              </Route>
+              <Route path="/notes" exact>
+                <Notes />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </NotesState>
       </NavState>
     </NewsState>
   );
