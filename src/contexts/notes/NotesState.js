@@ -12,7 +12,7 @@ import {
 export default function NotesState(props) {
   const initialState = {
     notes: [],
-    editing: false,
+    editing: null,
     text: "",
   };
   const [state, dispatch] = useReducer(NotesReducer, initialState);
@@ -44,7 +44,6 @@ export default function NotesState(props) {
 
   const handleSave = (e) => {
     e.preventDefault();
-    console.log(state.text);
     if (state.text !== undefined && state.text !== "") {
       let theNoteObj = {
         date: new Date().toLocaleDateString(),
@@ -66,7 +65,7 @@ export default function NotesState(props) {
 
   //individual notes
   const setEditNote = (noteObj) =>
-    dispatch({ type: EDIT_NOTE, action: noteObj });
+    dispatch({ type: EDIT_NOTE, payload: noteObj });
   const editNote = () => dispatch({ type: EDIT_NOTE });
   const setEditingNote = (noteId) => {
     dispatch({ type: EDITING_NOTE, payload: noteId });
@@ -94,15 +93,17 @@ export default function NotesState(props) {
 
   const saveEdited = (e) => {
     e.preventDefault();
-    setEditingNote(false, editNote.id);
-    let editedArrayOfNotes = findAndReplaceNote(
-      state.notes,
-      editNote.id,
-      editNote
-    );
-    if (!!editedArrayOfNotes) {
-      setNotes(editedArrayOfNotes);
-      localStorage.setItem("notes", JSON.stringify(editedArrayOfNotes));
+    setEditingNote(null);
+    if (!!state.editedNote?.id) {
+      let editedArrayOfNotes = findAndReplaceNote(
+        state.notes,
+        state.editedNote.id,
+        state.editedNote
+      );
+      if (!!editedArrayOfNotes) {
+        setNotes(editedArrayOfNotes, false);
+        localStorage.setItem("notes", JSON.stringify(editedArrayOfNotes));
+      }
     }
   };
 

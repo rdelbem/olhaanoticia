@@ -21,7 +21,6 @@ function TheNote(props) {
       <div className="note-text">
         {state.id !== id && (
           <>
-            {console.log(state.id === id, state.id, id)}
             <div className="icons">
               <FaEdit
                 className="icon-margin"
@@ -43,7 +42,6 @@ function TheNote(props) {
         )}
         {state.id === id && (
           <div className="form">
-            {console.log(state.id === id, state.id, id)}
             <textarea
               data-date={date}
               onChange={(e) => {

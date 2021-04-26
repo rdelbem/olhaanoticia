@@ -1,4 +1,10 @@
-import { CLEAR_TEXT, SET_TEXT, SET_NOTE, EDITING_NOTE } from "../types";
+import {
+  CLEAR_TEXT,
+  SET_TEXT,
+  SET_NOTE,
+  EDITING_NOTE,
+  EDIT_NOTE,
+} from "../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -24,11 +30,15 @@ export default (state, action) => {
           notes: [...action.payload.notes],
         };
       }
-
     case EDITING_NOTE:
       return {
         ...state,
         id: action.payload,
+      };
+    case EDIT_NOTE:
+      return {
+        ...state,
+        editedNote: action.payload,
       };
 
     default:
