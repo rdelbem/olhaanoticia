@@ -7,5 +7,4 @@ export const CLEAR_TEXT = "CLEAR_TEXT";
 export const SET_NOTE = "SET_NOTE";
 export const SET_TEXT = "SET_TEXT";
 export const EDITING_NOTE = "EDITING_NOTE";
-export const DELETE_NOTE = "DELETE_NOTE";
 export const EDIT_NOTE = "EDIT_NOTE";

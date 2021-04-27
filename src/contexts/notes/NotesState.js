@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { v4 as uuidv4 } from "uuid";
 import NotesContext from "./NotesContext";
 import NotesReducer from "./NotesReducer";
 import {
@@ -12,11 +13,11 @@ import {
 export default function NotesState(props) {
   const initialState = {
     notes: [],
-    editing: null,
     text: "",
   };
   const [state, dispatch] = useReducer(NotesReducer, initialState);
 
+  //actions
   const setTextArea = () => dispatch({ type: CLEAR_TEXT });
   const setTheText = (text) => dispatch({ type: SET_TEXT, payload: text });
   const setNotes = (content, storage) => {
@@ -31,6 +32,7 @@ export default function NotesState(props) {
         });
   };
 
+  //helper function: verifies stored notes, runs on page load; see useeffect bellow
   const verifyNotesStored = () => {
     if (!!localStorage.getItem("notes")) {
       let storedNotes = JSON.parse(localStorage.getItem("notes"));
@@ -38,10 +40,12 @@ export default function NotesState(props) {
     }
   };
 
+  //This verifies if there is any stored note at app load, if there is any it fetch from local storage
   useEffect(() => {
     verifyNotesStored();
   }, []);
 
+  //saves the notes that come from text area
   const handleSave = (e) => {
     e.preventDefault();
     if (state.text !== undefined && state.text !== "") {
@@ -63,7 +67,8 @@ export default function NotesState(props) {
     }
   };
 
-  //individual notes
+  //
+  //this section is responsible for editing and deleting each individual note
   const setEditNote = (noteObj) =>
     dispatch({ type: EDIT_NOTE, payload: noteObj });
   const editNote = () => dispatch({ type: EDIT_NOTE });
@@ -71,6 +76,7 @@ export default function NotesState(props) {
     dispatch({ type: EDITING_NOTE, payload: noteId });
   };
 
+  //helper function: this function proccesses the array of objects that is saved at local storage; it performs a find and replace
   const findAndReplaceNote = (arrayInput, _id, replacement) => {
     let indexRemoved = 0;
     let replacedObj;
@@ -91,6 +97,7 @@ export default function NotesState(props) {
     }
   };
 
+  //this function saves edited notes back to state and to local storage
   const saveEdited = (e) => {
     e.preventDefault();
     setEditingNote(null);
@@ -107,13 +114,13 @@ export default function NotesState(props) {
     }
   };
 
+  //delete notes from state and local storage
   const deleteNote = (e) => {
-    setEditingNote(false);
     const noteId = e.target.getAttribute("data-id");
     let notesAfterDelete = state.notes.filter((note) => {
       return note.id !== parseInt(noteId);
     });
-    setNotes(notesAfterDelete);
+    setNotes(notesAfterDelete, false);
     localStorage.setItem("notes", JSON.stringify(notesAfterDelete));
   };
 

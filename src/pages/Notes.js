@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import TheNote from "../components/TheNote";
 import NotesContext from "../contexts/notes/NotesContext";
 
@@ -27,9 +28,20 @@ function Notes() {
         </div>
 
         <div className="notes">
-          {state.notes.map((item, index) => {
-            return <TheNote key={index} {...item} />;
-          })}
+          {!!!state.notes.length && (
+            <>
+              <center>
+                <h1>Suas notas aparecerão aqui!</h1>
+              </center>
+            </>
+          )}
+          <TransitionGroup>
+            {state.notes.map((item, index) => (
+              <CSSTransition key={index} timeout={300} classNames="item">
+                <TheNote {...item} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         </div>
       </div>
     </div>

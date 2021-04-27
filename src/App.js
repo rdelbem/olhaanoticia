@@ -20,23 +20,23 @@ function App() {
   return (
     <NewsState>
       <NavState>
-        <NotesState>
-          <BrowserRouter>
-            <Menu />
-            <Header />
-            <Switch>
-              <Route path="/" exact>
-                <NewsFront />
-              </Route>
-              <Route path="/for-later-news" exact>
-                <ForLaterNews />
-              </Route>
-              <Route path="/notes" exact>
+        <BrowserRouter>
+          <Menu />
+          <Header />
+          <Switch>
+            <Route path="/" exact>
+              <NewsFront />
+            </Route>
+            <Route path="/for-later-news" exact>
+              <ForLaterNews />
+            </Route>
+            <Route path="/notes" exact>
+              <NotesState>
                 <Notes />
-              </Route>
-            </Switch>
-          </BrowserRouter>
-        </NotesState>
+              </NotesState>
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </NavState>
     </NewsState>
   );

@@ -16,52 +16,54 @@ function TheNote(props) {
   } = notesContext;
 
   return (
-    <div className="the-note-box">
-      <h4>Nota tomada em - {date}</h4>
-      <div className="note-text">
-        {state.id !== id && (
-          <>
-            <div className="icons">
-              <FaEdit
-                className="icon-margin"
-                id={id}
-                onClick={() => {
-                  editingNote ? setEditingNote(id) : setEditingNote(id);
+    <>
+      <div className="the-note-box">
+        <h4>Nota tomada em - {date}</h4>
+        <div className="note-text">
+          {state.id !== id && (
+            <>
+              <div className="icons">
+                <FaEdit
+                  className="icon-margin"
+                  id={id}
+                  onClick={() => {
+                    editingNote ? setEditingNote(id) : setEditingNote(id);
+                  }}
+                />
+                <FaRegTrashAlt
+                  className="red"
+                  data-id={id}
+                  onClick={deleteNote}
+                />{" "}
+              </div>
+              <div className="the-text">
+                <p>{note}</p>
+              </div>
+            </>
+          )}
+          {state.id === id && (
+            <div className="form">
+              <textarea
+                data-date={date}
+                onChange={(e) => {
+                  setEditNote({
+                    date: e.target.getAttribute("data-date"),
+                    id: parseInt(e.target.id),
+                    note: e.target.value,
+                  });
                 }}
-              />
-              <FaRegTrashAlt
-                className="red"
-                data-id={id}
-                onClick={deleteNote}
-              />{" "}
+                id={id}
+                cols="50"
+                rows="3"
+                autoFocus
+                defaultValue={note}
+              ></textarea>
+              <button onClick={saveEdited}>salvar</button>
             </div>
-            <div className="the-text">
-              <p>{note}</p>
-            </div>
-          </>
-        )}
-        {state.id === id && (
-          <div className="form">
-            <textarea
-              data-date={date}
-              onChange={(e) => {
-                setEditNote({
-                  date: e.target.getAttribute("data-date"),
-                  id: parseInt(e.target.id),
-                  note: e.target.value,
-                });
-              }}
-              id={id}
-              cols="50"
-              rows="3"
-              autoFocus
-              defaultValue={note}
-            ></textarea>
-            <button onClick={saveEdited}>salvar</button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
