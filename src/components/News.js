@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 import dateFormat from "dateformat";
 
 function News(props) {
@@ -54,6 +55,9 @@ function News(props) {
         <small className="published-date">
           {dateFormat(published_date, "dd/mm/yyyy")}
         </small>
+        <a href={`whatsapp://send?text=${link}`} target="_blank">
+          <FaWhatsapp className="share" />
+        </a>
       </div>
 
       {media && (
@@ -76,9 +80,7 @@ function News(props) {
         </div>
         <div className="footer-note">
           <small className="footer-note-text">
-            <p>
-              <a href={clean_url}>{rights !== "" ? rights : clean_url}</a>
-            </p>
+            <p>{rights !== "" ? rights : clean_url}</p>
           </small>
         </div>
         <div className={`footer-note ${wasSaved ? "was-saved" : ""}`}>

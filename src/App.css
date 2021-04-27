@@ -9,6 +9,7 @@
 
 html {
   font-size: 62.5%;
+  overflow-x: hidden;
 }
 
 body {
@@ -41,7 +42,6 @@ a {
 }
 
 .header {
-  /* min-height: 10rem;*/
   margin-top: 0;
   position: relative;
   z-index: -1;
@@ -378,6 +378,31 @@ a {
   margin-bottom: 0.5rem;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form textarea {
+  width: 99%;
+  margin-bottom: 0.5rem;
+}
+
+.form button {
+  width: 99%;
+  background-color: #76ebc8;
+  border: 1px solid #69c0a6;
+  padding: 0.3rem;
+  border-radius: 5px;
+  transition: all 0.5s;
+}
+
+.form button:hover {
+  background-color: #6bdab8;
+}
+
 .the-text {
   word-break: break-all;
 }
@@ -388,6 +413,20 @@ a {
   width: 99.6%;
 }
 
+.share {
+  float: left;
+  color: #fff;
+  font-size: 2.5rem;
+  padding: 0.2rem;
+  background-color: #69c0a6;
+  transition: all 0.5s;
+  border-radius: 5px;
+}
+
+.share:hover {
+  background-color: #76ebc8;
+}
+
 .red {
   color: red;
 }
@@ -396,7 +435,7 @@ a {
   margin-right: 1rem;
 }
 
-/* Animation (Add After) */
+/* Animation for the transition group */
 .item-enter {
   opacity: 0;
   transform: scale(0.9);
