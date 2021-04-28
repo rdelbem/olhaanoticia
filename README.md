@@ -1,7 +1,7 @@
 # Olha a notícia
 
 Olá!
-Esse é o repo de um aplicativo PWA em ReactJS. Trata-se de uma aplicação que consome uma api REST que agrega notícias.
+Esse é o repo de um aplicativo PWA em ReactJS. Trata-se de uma aplicação que consome uma api REST que agrega notícias (News Catcher).
 "Olha a notícia" mostra 5 notícias internacionais por dia, sempre em português. =)
 
 # Salvar notícias
@@ -12,3 +12,7 @@ Tudo é feito por meio do localstorage, que guarda uma array de objetos com as i
 # Tome notas
 
 É possível tomar notas no aplicativo.
+
+# Acesse
+
+https://heuristic-villani-13c74a.netlify.app
